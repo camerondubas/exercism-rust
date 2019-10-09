@@ -7,8 +7,7 @@ pub fn after(start: DateTime<Utc>) -> DateTime<Utc> {
     match start.checked_add_signed(gigasecond) {
         Some(x) => x,
         None => {
-            eprintln!("Time overflows");
-            start
+            panic!("Time overflows")
         }
     }
 }
