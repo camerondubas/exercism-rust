@@ -1,21 +1,21 @@
 pub fn raindrops(n: u32) -> String {
-    let mut output = Vec::new();
+    let mut output = String::new();
 
-    if n % 3 == 0 {
-      output.push("Pling");
-    }
+    let cases = [
+      (3, "Pling"),
+      (5, "Plang"),
+      (7, "Plong"),
+    ];
 
-    if n % 5 == 0 {
-      output.push("Plang");
-    }
-
-    if n % 7 == 0 {
-      output.push("Plong");
+    for (num, word) in cases.iter() {
+      if n % num == 0 {
+        output.push_str(word);
+      }
     }
 
     if output.is_empty() {
       return n.to_string()
     }
 
-    output.join("")
+    output
 }
