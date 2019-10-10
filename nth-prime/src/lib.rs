@@ -5,7 +5,6 @@ pub fn nth(n: u32) -> u32 {
 
     while (prime_numbers.len() as u32) < n + 1 {
       if is_prime(num) {
-        println!("Found Prime: {}", num);
         prime_numbers.push(num)
       }
 
