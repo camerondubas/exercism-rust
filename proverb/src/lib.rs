@@ -7,7 +7,7 @@ pub fn build_proverb(list: &[&str]) -> String {
 
       let line = match next {
         Some(_x) => format!("For want of a {} the {} was lost.\n", current, next.unwrap()),
-        None => format!("And all for the want of a {}.", list.iter().nth(0).unwrap())
+        None => format!("And all for the want of a {}.", list[0])
       };
 
       output = format!("{}{}", output, line)
