@@ -1,6 +1,7 @@
 pub fn is_armstrong_number(num: u32) -> bool {
     let digits = digits_from_number(num);
     let length = digits.len() as u32;
+
     let sum = digits.iter().fold(0, |acc, digit| acc + digit.pow(length));
 
     sum == num
