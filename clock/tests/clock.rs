@@ -287,3 +287,9 @@ fn test_compare_clocks_with_negative_hours_and_minutes_that_wrap() {
 fn test_compare_full_clock_and_zeroed_clock() {
     assert_eq!(Clock::new(24, 0), Clock::new(0, 0))
 }
+
+#[test]
+fn test_string_from() {
+    assert_eq!(String::from(Clock::new(10, 30)), String::from("10:30"))
+}
+
