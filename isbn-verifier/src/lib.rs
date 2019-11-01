@@ -5,23 +5,18 @@ pub fn is_valid_isbn(isbn: &str) -> bool {
     }
 
     let mut has_invalid_char = false;
-    let sum = isbn.chars().filter(|c| c.is_alphanumeric())
-        .enumerate()
-        .filter_map(|(idx, c)| match c {
-            x if x.is_digit(10) => Some(x.to_digit(10).unwrap() * (10 - idx as u32)),
-            'X' | 'x' => {
-                if idx == 9 {
-                    Some(10 * (10 - idx as u32))
-                } else {
-                    None
-                }
-            }
-            _ => {
-              has_invalid_char = true;
-              None
-              },
-        })
-        .sum::<u32>();
+    let mut sum = 0;
+
+    for (idx, c) in isbn.chars().filter(|c| c.is_alphanumeric()).enumerate().peekable() {
+      if c.is_digit(10) {
+        sum = sum + c.to_digit(10).unwrap() * (10 - idx as u32);
+      } else if c == 'X' && idx == 9 {
+        sum = sum + 10 * (10 - idx as u32)
+      } else {
+        has_invalid_char = true;
+        break;
+      }
+    }
 
     if has_invalid_char {
       false
