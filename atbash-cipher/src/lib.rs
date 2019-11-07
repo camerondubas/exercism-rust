@@ -12,27 +12,24 @@ pub fn decode(cipher: &str) -> String {
 
 
 fn add_spaces(string: String) -> String {
-  let chars: Vec<char> = string.chars().collect();
-
-  chars
+  string
+    .chars()
+    .collect::<Vec<char>>()
     .chunks(5)
-    .map(|chunk| chunk.iter().collect::<String>() + " ")
-    .collect::<String>()
-    .trim_end().to_string()
+    .map(|chunk| chunk.iter().collect::<String>())
+    .collect::<Vec<String>>()
+    .join(" ")
 }
 
 fn apply_cipher(input: &str) -> String {
-  input.to_lowercase().chars().filter(|c| {
-    match c {
-     x if x.is_ascii_alphanumeric() => true,
-      _ => false
-    }
-  })
+  input
+  .to_lowercase()
+  .chars()
+  .filter(|c| c.is_ascii_alphanumeric())
   .map(|c| {
     match c {
       x if x.is_ascii_alphabetic() => {
-        let digit = 26 - (c.to_digit(36).unwrap() - 10);
-        char::from_digit(digit + 9, 36).unwrap()
+        (26 - ((x as u8) - 97) + 96) as char
       },
       _ => c
     }
