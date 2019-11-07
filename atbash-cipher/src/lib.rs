@@ -28,9 +28,7 @@ fn apply_cipher(input: &str) -> String {
   .filter(|c| c.is_ascii_alphanumeric())
   .map(|c| {
     match c {
-      x if x.is_ascii_alphabetic() => {
-        (26 - ((x as u8) - 97) + 96) as char
-      },
+      x if x.is_ascii_alphabetic() => (26 - ((x as u8) - 97) + 96) as char,
       _ => c
     }
   })
