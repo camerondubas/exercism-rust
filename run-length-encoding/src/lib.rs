@@ -28,11 +28,6 @@ pub fn encode(source: &str) -> String {
 
 pub fn decode(source: &str) -> String {
     let mut output: String = String::new();
-
-    if source.is_empty() {
-        return output;
-    }
-
     let mut chars_iter = source.chars();
     let mut num_str = String::new();
 
@@ -40,9 +35,8 @@ pub fn decode(source: &str) -> String {
         if c.is_ascii_digit() {
             num_str.push(c);
         } else {
-            let p: u8 = num_str.parse().unwrap_or(1);
-            let partial: String = (1..=p).map(|_| c).collect::<String>();
-            output = format!("{}{}", output, partial);
+            let count = num_str.parse().unwrap_or(1);
+            output = output + c.to_string().repeat(count).as_str();
             num_str = String::new();
         }
     }
