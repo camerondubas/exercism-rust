@@ -13,29 +13,18 @@ pub fn encode(source: &str) -> String {
         if c == current_letter {
             current_count = current_count + 1;
         } else {
-            output = build_output(current_count, current_letter, output);
+            output = build_encode_output(current_count, current_letter, output);
             current_letter = c;
             current_count = 1;
         }
 
         match peekable_chars.peek() {
-            None => output = build_output(current_count, current_letter, output),
+            None => output = build_encode_output(current_count, current_letter, output),
             _ => {}
         }
     }
     output
 }
-
-fn build_output(count: u8, letter: char, output: String) -> String {
-    let partial = match count {
-        1 => format!("{}", letter),
-        _ => format!("{}{}", count, letter),
-    };
-
-    return format!("{}{}", output, partial);
-}
-
-fb han
 
 pub fn decode(source: &str) -> String {
     let mut output: String = String::new();
@@ -59,4 +48,14 @@ pub fn decode(source: &str) -> String {
     }
 
     output
+}
+
+
+fn build_encode_output(count: u8, letter: char, output: String) -> String {
+    let partial = match count {
+        1 => format!("{}", letter),
+        _ => format!("{}{}", count, letter),
+    };
+
+    return format!("{}{}", output, partial);
 }
